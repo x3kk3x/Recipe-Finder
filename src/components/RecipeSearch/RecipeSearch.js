@@ -1,26 +1,44 @@
-import React from "react";
-import { InputGroup, FormControl, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import RecipeService from "../../services/RecipeService/RecipeService";
+import RecipeList from "../RecipeList/RecipeList";
+import "../../App.css";
 
 const RecipeSearch = () => {
-  const handleSearch = (event) => {
-    // Handle the search logic
+  const [searchQuery, setSearchQuery] = useState("");
+  const [recipes, setRecipes] = useState([]);
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+
+    try {
+      const recipeData = await RecipeService.searchRecipes(searchQuery);
+      setRecipes(recipeData);
+    } catch (error) {
+      console.error("Error searching for recipes:", error);
+      setRecipes([]);
+    }
   };
 
   return (
-    <div className="container d-flex align-items-center justify-content-center vh-100">
-      <div className="row">
-        <div>
-          <InputGroup className="mb-3">
-            <FormControl
-              placeholder="Search for recipes"
-              aria-label="Search for recipes"
-              aria-describedby="search-button"
-            />
-            <Button variant="primary" id="search-button" onClick={handleSearch}>
-              Search
-            </Button>
-          </InputGroup>
-        </div>
+    <div className="recipe-search-container">
+      <div className="recipe-search-form">
+        <form onSubmit={handleSearch} className="d-flex justify-content-center">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Search for recipes"
+            className="form-control me-2 recipe-search-input"
+          />
+          <button
+            type="submit"
+            className="btn btn-primary recipe-search-button"
+          >
+            Search
+          </button>
+        </form>
+
+        <RecipeList recipes={recipes} />
       </div>
     </div>
   );

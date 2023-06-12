@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.recipe-search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+}
+
+.recipe-search-form {
+  width: 30%;
+}
+
+.recipe-search-input {
+  margin-right: 2rem;
+}
+
+.recipe-search-button {
+  width: 100px;
+}
