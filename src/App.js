@@ -1,11 +1,13 @@
 import "./App.css";
+import RecipeSearch from "./components/RecipeSearch/RecipeSearch";
+import RecipeList from "./components/RecipeList/RecipeList";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>First commit!</p>
-      </header>
+      <RecipeSearch />
+      <RecipeList />
     </div>
   );
 }
