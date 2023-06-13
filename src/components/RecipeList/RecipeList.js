@@ -7,7 +7,7 @@ const RecipeList = ({ recipes }) => {
     <Row className="justify-content-center d-flex">
       {recipes && recipes.length > 0 ? (
         recipes.map((recipe, index) => (
-          <Col key={index} xs={12} sm={6} md={4} lg={3}>
+          <Col key={index}>
             <Card className="recipe-card">
               <Card.Img variant="top" src={recipe.image} />
               <Card.Body>
