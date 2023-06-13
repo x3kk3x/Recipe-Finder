@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RecipeService from "../../services/RecipeService/RecipeService";
-import { Pagination } from "react-bootstrap";
+import { Pagination, Alert } from "react-bootstrap";
 import RecipeList from "../RecipeList/RecipeList";
 import "./recipeSearch.css";
 
@@ -9,15 +9,22 @@ const RecipeSearch = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage] = useState(3);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleSearch = async (event) => {
     event.preventDefault();
+
+    if (searchQuery.trim() === "") {
+      setShowAlert(true);
+      return;
+    }
 
     try {
       const recipeData = await RecipeService.searchRecipes(searchQuery);
       console.log(recipeData); // Check the data received from the service
       setRecipes(recipeData);
       setCurrentPage(1); // Reset to first page when new search is performed
+      setShowAlert(false); // Hide the alert when search is successful
     } catch (error) {
       console.error("Error searching for recipes:", error);
       setRecipes([]);
@@ -48,15 +55,18 @@ const RecipeSearch = () => {
             placeholder="Search for recipes..."
             className="form-control me-2 recipe-search-input"
           />
-          <button
-            type="submit"
-            className="btn btn-primary recipe-search-button"
-          >
+          <button type="submit" className="btn btn-dark recipe-search-button">
             Search
           </button>
         </form>
 
-        <RecipeList recipes={currentRecipes} />
+        {showAlert && (
+          <Alert variant="danger" className="mt-3">
+            Please enter a search query.
+          </Alert>
+        )}
+
+        {recipes.length > 0 && <RecipeList recipes={currentRecipes} />}
 
         <div className="pagination-container">
           <Pagination>
