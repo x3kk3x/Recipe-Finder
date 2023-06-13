@@ -1,23 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RecipeService from "../../services/RecipeService/RecipeService";
+import { Pagination } from "react-bootstrap";
 import RecipeList from "../RecipeList/RecipeList";
-import "../../App.css";
+import "./recipeSearch.css";
 
 const RecipeSearch = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recipesPerPage] = useState(3);
 
   const handleSearch = async (event) => {
     event.preventDefault();
 
     try {
       const recipeData = await RecipeService.searchRecipes(searchQuery);
+      console.log(recipeData); // Check the data received from the service
       setRecipes(recipeData);
+      setCurrentPage(1); // Reset to first page when new search is performed
     } catch (error) {
       console.error("Error searching for recipes:", error);
       setRecipes([]);
     }
   };
+
+  useEffect(() => {
+    // Update pagination when recipes change
+    setCurrentPage(1);
+  }, [recipes]);
+
+  const indexOfLastRecipe = currentPage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+  const totalPages = Math.ceil(recipes.length / recipesPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="recipe-search-container">
@@ -27,7 +45,7 @@ const RecipeSearch = () => {
             type="text"
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
-            placeholder="Search for recipes"
+            placeholder="Search for recipes..."
             className="form-control me-2 recipe-search-input"
           />
           <button
@@ -38,7 +56,21 @@ const RecipeSearch = () => {
           </button>
         </form>
 
-        <RecipeList recipes={recipes} />
+        <RecipeList recipes={currentRecipes} />
+
+        <div className="pagination-container">
+          <Pagination>
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <Pagination.Item
+                key={index + 1}
+                active={index + 1 === currentPage}
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </Pagination.Item>
+            ))}
+          </Pagination>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,25 @@
+.recipe-card {
+  width: 400px;
+  margin-bottom: 20px;
+  height: 300px;
+  margin: 120px;
+}
+
+.recipe-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-img {
+  width: 50%;
+}
+
+.recipe-description {
+  font-size: 16px;
+  color: #333;
+}
+
+.recipe-list {
+  margin: -10px;
+}
