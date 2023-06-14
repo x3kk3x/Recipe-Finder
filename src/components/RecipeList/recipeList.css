@@ -1,13 +1,13 @@
 .recipe-card {
-  width: 400px;
   margin-bottom: 20px;
-  margin: 40px;
+  margin: 40px 7px;
 }
 
 .recipe-title {
   font-size: 20px;
   font-weight: bold;
   color: #333;
+  text-transform: capitalize;
 }
 
 .card-img {
@@ -15,7 +15,8 @@
 }
 
 .card {
-  height: 45vh !important;
+  width: 400px;
+  height: 48vh !important;
   background-position: -110px 0;
   -webkit-box-shadow: 0px 0px 26px -10px rgba(190, 190, 190, 1);
   -moz-box-shadow: 0px 0px 26px -10px rgba(190, 190, 190, 1);
@@ -23,10 +24,28 @@
 }
 
 .recipe-description {
-  font-size: 16px;
-  color: #333;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  color: #000000;
 }
 
 .recipe-list {
   margin: -10px;
+}
+
+.recipe-modal {
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.recipe-info {
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  color: #4d4d4d;
+  margin-top: 5px;
 }

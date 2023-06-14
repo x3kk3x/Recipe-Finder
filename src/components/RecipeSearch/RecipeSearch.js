@@ -45,7 +45,7 @@ const RecipeSearch = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="recipe-search-container">
+    <div className="recipe-search-container background-image">
       <div className="recipe-search-form">
         <h1 className="form-title">Delicious Recipes with Recipe Finder</h1>
         <p className="form-description">
