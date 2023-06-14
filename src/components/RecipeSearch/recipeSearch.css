@@ -10,18 +10,57 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 90vh;
   background-color: #fff;
   margin-bottom: 20px;
-  border: 2px outset #fff;
   padding: 60px;
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+}
+
+.form-container {
+  width: 60%;
+}
+
+.form-title {
+  font-size: 3rem;
+  margin-bottom: 50px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+}
+
+.form-description {
+  width: 60%;
+  margin-bottom: 50px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
 }
 
 .recipe-search-input {
-  width: 100%;
+  width: 50%;
+  border: solid 1px #bebebe;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.recipe-search-input:focus {
+  border-color: #000 !important;
 }
 
 .pagination-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+.pagination .page-item .page-link {
+  background-color: #000;
+  border-color: #333;
+  color: #fff;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #292929;
+  border-color: #292929;
 }

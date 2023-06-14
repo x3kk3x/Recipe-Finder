@@ -13,7 +13,13 @@ const RecipeList = ({ recipes }) => {
               <Card.Body>
                 <Card.Title className="recipe-title">{recipe.label}</Card.Title>
                 <Card.Text className="recipe-description">
-                  {recipe.healthLabels}
+                  {recipe.cuisineType}
+                </Card.Text>
+                <Card.Text className="recipe-description">
+                  {recipe.mealType}
+                </Card.Text>
+                <Card.Text className="recipe-description">
+                  {recipe.dietLabels}
                 </Card.Text>
               </Card.Body>
             </Card>

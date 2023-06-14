@@ -47,13 +47,22 @@ const RecipeSearch = () => {
   return (
     <div className="recipe-search-container">
       <div className="recipe-search-form">
-        <form onSubmit={handleSearch} className="d-flex justify-content-center">
+        <h1 className="form-title">Delicious Recipes with Recipe Finder</h1>
+        <p className="form-description">
+          Turn your leftover ingredients into culinary masterpieces! With Recipe
+          Finder, simply enter the ingredients you have on hand and unlock a
+          world of mouthwatering recipes tailored to your pantry.
+        </p>
+        <form
+          onSubmit={handleSearch}
+          className="d-flex justify-content-center form-container"
+        >
           <input
             type="text"
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
             placeholder="Search for recipes..."
-            className="form-control me-2 recipe-search-input"
+            className="recipe-search-input me-2"
           />
           <button type="submit" className="btn btn-dark recipe-search-button">
             Search

@@ -1,6 +1,10 @@
+body {
+  font-family: "Roboto Mono", monospace;
+}
+
 .App {
   text-align: center;
-  background-color: rgb(206, 58, 58);
+  /* background-color: rgb(206, 58, 58); */
 }
 
 .App-logo {
