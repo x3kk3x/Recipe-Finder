@@ -1,0 +1,46 @@
+.home-window {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 65vh;
+  background-color: #fff;
+  padding: 60px;
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+  background-image: url("../../../public/fruit.png");
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  background-position-x: left;
+  background-size: 25%;
+}
+
+.background-image {
+  background-image: url("../../../public/vegetables.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 80%;
+}
+
+.home-small {
+  margin-bottom: 20px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+}
+
+.home-title {
+  font-size: 2.7rem;
+  margin-bottom: 50px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+}
+
+.home-description {
+  width: 60%;
+  margin-bottom: 50px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  text-align: center;
+}
