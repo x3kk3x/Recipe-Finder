@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 import "./style/forgotPassword.css";
+import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   return (
@@ -21,12 +22,16 @@ const ForgotPassword = () => {
           </Button>
 
           <div className="forgot-password-links mt-3">
-            <a href="#" variant="link" className="forgot-password-buttons">
-              Back to Login
-            </a>
-            <a href="#" variant="link" className="forgot-password-buttons">
-              Sign up
-            </a>
+            <Link to="/login">
+              <Button variant="link" className="link-btn">
+                Login
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button variant="link" className="login-buttons">
+                Sign up
+              </Button>
+            </Link>
           </div>
         </Form>
       </div>

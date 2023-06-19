@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 import "./style/login.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -24,17 +25,23 @@ const Login = () => {
             />
           </Form.Group>
 
-          <Button variant="dark" type="submit" className="mt-5">
-            Login
-          </Button>
+          <Link to="/recipe-search">
+            <Button variant="dark" type="submit" className="mt-5">
+              Login
+            </Button>
+          </Link>
 
           <div className="login-links mt-3">
-            <a href="#" variant="link" className="login-buttons">
-              Forgot password?
-            </a>
-            <a href="#" variant="link" className="login-buttons">
-              Sign up
-            </a>
+            <Link to="/forgotten-password">
+              <Button variant="link" className="login-buttons">
+                Forgot password?
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button variant="link" className="login-buttons">
+                Sign up
+              </Button>
+            </Link>
           </div>
         </Form>
       </div>

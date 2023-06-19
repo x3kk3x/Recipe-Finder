@@ -4,15 +4,17 @@ import Home from "./components/Home/Home";
 import RecipeSearch from "./components/RecipeSearch/RecipeSearch";
 import SignUp from "./components/Auth/SignUp";
 import Login from "./components/Auth/Login";
+import ForgotPassword from "./components/Auth/ForgotPassword";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<RecipeSearch />} />
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/recipe-search" element={<RecipeSearch />} />
+        <Route path="/forgotten-password" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );

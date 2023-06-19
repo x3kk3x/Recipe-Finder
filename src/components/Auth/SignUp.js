@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 import "./style/signup.css";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
@@ -37,9 +38,11 @@ const Signup = () => {
           </Button>
 
           <div className="signup-links mt-3">
-            <a href="#" variant="link" className="signup-buttons">
-              Login
-            </a>
+            <Link to="/login">
+              <Button variant="link" className="link-btn">
+                Login
+              </Button>
+            </Link>
           </div>
         </Form>
       </div>
