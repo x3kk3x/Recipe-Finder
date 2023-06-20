@@ -5,6 +5,7 @@ import RecipeSearch from "./components/RecipeSearch/RecipeSearch";
 import SignUp from "./components/Auth/SignUp";
 import Login from "./components/Auth/Login";
 import ForgotPassword from "./components/Auth/ForgotPassword";
+import RegistrationSuccessful from "./components/Auth/RegistrationSuccessful";
 
 const App = () => {
   return (
@@ -15,6 +16,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/recipe-search" element={<RecipeSearch />} />
         <Route path="/forgotten-password" element={<ForgotPassword />} />
+        <Route
+          path="/registration-successfull"
+          element={<RegistrationSuccessful />}
+        />
       </Routes>
     </Router>
   );

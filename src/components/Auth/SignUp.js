@@ -1,22 +1,34 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import "./style/signup.css";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../services/Firebase/firebase"; // Import the 'auth' object from the Firebase module
+import { auth } from "../../services/Firebase/firebase";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    try {
-      await auth.createUserWithEmailAndPassword(email, password); // Use the 'auth' object to create a new user with email and password
-      // You can add additional logic here (e.g., save user data to Firestore)
 
-      navigate("/home"); // Redirect to the home page after successful sign up
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+
+    try {
+      const userCredential = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await user.sendEmailVerification();
+
+      navigate("/registration-successfull");
     } catch (error) {
       console.log(error.message);
     }
@@ -56,6 +68,8 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
+
+          {emailError && <Alert variant="danger">{emailError}</Alert>}
 
           <Button variant="dark" type="submit" className="mt-5">
             Sign Up

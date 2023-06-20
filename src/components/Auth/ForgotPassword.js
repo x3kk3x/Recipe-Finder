@@ -23,12 +23,12 @@ const ForgotPassword = () => {
 
           <div className="forgot-password-links mt-3">
             <Link to="/login">
-              <Button variant="link" className="link-btn">
+              <Button variant="outline-dark" className="link-btn">
                 Login
               </Button>
             </Link>
             <Link to="/signup">
-              <Button variant="link" className="login-buttons">
+              <Button variant="outline-dark" className="login-buttons">
                 Sign up
               </Button>
             </Link>
