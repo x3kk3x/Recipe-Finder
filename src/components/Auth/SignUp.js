@@ -59,7 +59,7 @@ const Signup = () => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formPassword" className="mt-3">
+          <Form.Group controlId="formPassword" className="mt-3 mb-4">
             <Form.Control
               type="password"
               placeholder="Password"
@@ -75,11 +75,9 @@ const Signup = () => {
             Sign Up
           </Button>
 
-          <div className="signup-links mt-3">
+          <div className="mt-5">
             <Link to="/login">
-              <Button variant="link" className="link-btn">
-                Login
-              </Button>
+              <Button variant="outline-dark">Login</Button>
             </Link>
           </div>
         </Form>

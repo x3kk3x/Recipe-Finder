@@ -57,7 +57,7 @@ const Login = () => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formPassword" className="mt-3">
+          <Form.Group controlId="formPassword" className="mt-3 mb-4">
             <Form.Control
               type="password"
               placeholder="Password"
