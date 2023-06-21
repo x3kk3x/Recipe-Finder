@@ -28,7 +28,9 @@ const Signup = () => {
       const user = userCredential.user;
       await user.sendEmailVerification();
 
-      navigate("/registration-successfull");
+      // Additional logic here if needed
+
+      navigate("/home");
     } catch (error) {
       console.log(error.message);
     }
@@ -59,11 +61,11 @@ const Signup = () => {
             />
           </Form.Group>
 
-          <Form.Group controlId="formPassword" className="mt-3 mb-4">
+          <Form.Group controlId="formPassword" className="mt-3">
             <Form.Control
               type="password"
               placeholder="Password"
-              className="signup-input"
+              className="signup-input mb-3"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -74,13 +76,12 @@ const Signup = () => {
           <Button variant="dark" type="submit" className="mt-5">
             Sign Up
           </Button>
-
-          <div className="mt-5">
-            <Link to="/login">
-              <Button variant="outline-dark">Login</Button>
-            </Link>
-          </div>
         </Form>
+        <div className="mt-5">
+          <Link to="/login">
+            <Button variant="outline-dark">Login</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -3,8 +3,10 @@ import RecipeService from "../../services/RecipeService/RecipeService";
 import { Pagination, Alert } from "react-bootstrap";
 import RecipeList from "../RecipeList/RecipeList";
 import "./recipeSearch.css";
+import { useAuth } from "../../components/Auth/AuthContext"; // Import the AuthContext
 
 const RecipeSearch = () => {
+  const { currentUser, isLoading } = useAuth(); // Access the current user and loading state from AuthContext
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,6 +45,17 @@ const RecipeSearch = () => {
   const totalPages = Math.ceil(recipes.length / recipesPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Check if the user is logged in or authentication state is loading
+  if (!currentUser && !isLoading) {
+    return (
+      <div className="recipe-search-container background-image">
+        <div className="recipe-search-form">
+          <h2 className="form-title">Please log in to access this page.</h2>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="recipe-search-container background-image">

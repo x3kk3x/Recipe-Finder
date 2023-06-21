@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import "./style/forgotPassword.css";
-import { Link } from "react-router-dom";
 import { auth } from "../../services/Firebase/firebase";
 
 const ForgotPassword = () => {
