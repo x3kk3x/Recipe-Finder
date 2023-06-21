@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-import RecipeService from "../../services/RecipeService/RecipeService";
-import { Pagination, Alert } from "react-bootstrap";
-import RecipeList from "../RecipeList/RecipeList";
+import RecipeService from "../../../services/RecipeService/RecipeService";
+import { Pagination, Alert, Button, Row, Col, Dropdown } from "react-bootstrap";
+import RecipeList from "../../RecipeList/RecipeList";
 import "./recipeSearch.css";
-import { useAuth } from "../../components/Auth/AuthContext"; // Import the AuthContext
+import { useAuth } from "../../Auth/AuthContext"; // Import the AuthContext
+import { useNavigate, Link } from "react-router-dom";
+import { BsFillPersonFill } from "react-icons/bs";
 
 const RecipeSearch = () => {
-  const { currentUser, isLoading } = useAuth(); // Access the current user and loading state from AuthContext
+  const { currentUser, isLoading, logout } = useAuth(); // Access the current user, loading state, and logout function from AuthContext
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage] = useState(3);
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate(); // Access the history object from react-router-dom
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -33,6 +36,15 @@ const RecipeSearch = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await logout(); // Call the logout function from AuthContext
+      navigate("/login"); // Redirect the user to the login page after logout
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
   useEffect(() => {
     // Update pagination when recipes change
     setCurrentPage(1);
@@ -46,20 +58,51 @@ const RecipeSearch = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Check if the user is logged in or authentication state is loading
   if (!currentUser && !isLoading) {
     return (
       <div className="recipe-search-container background-image">
-        <div className="recipe-search-form">
+        <div className="container recipe-form-alert recipe-search-form">
           <h2 className="form-title">Please log in to access this page.</h2>
+          <Row className="justify-content-between">
+            <Col xs="auto">
+              <Link to="/signup">
+                <Button className="home-button" variant="dark">
+                  Sign Up
+                </Button>
+              </Link>
+            </Col>
+            <Col xs="auto">
+              <Link to="/login">
+                <Button className="home-button" variant="dark">
+                  Login
+                </Button>
+              </Link>
+            </Col>
+          </Row>
         </div>
       </div>
     );
   }
 
+  if (!currentUser) {
+    return null; // Return null to prevent rendering the component temporarily
+  }
+
   return (
     <div className="recipe-search-container background-image">
       <div className="recipe-search-form">
+        <div className="dropdown-button-container dropdown-container">
+          <Dropdown>
+            <Dropdown.Toggle variant="light" id="dropdown-basic">
+              <BsFillPersonFill />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu align="right">
+              <Dropdown.Item>Profile</Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
         <h1 className="form-title">Delicious Recipes with Recipe Finder</h1>
         <p className="form-description">
           Turn your leftover ingredients into culinary masterpieces! With Recipe
