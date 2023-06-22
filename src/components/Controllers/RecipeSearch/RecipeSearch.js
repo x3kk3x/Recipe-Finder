@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import RecipeService from "../../../services/RecipeService/RecipeService";
 import { Pagination, Alert, Button, Row, Col, Dropdown } from "react-bootstrap";
-import RecipeList from "../../RecipeList/RecipeList";
+
 import "./recipeSearch.css";
 import { useAuth } from "../../Auth/AuthContext"; // Import the AuthContext
 import { useNavigate, Link } from "react-router-dom";
 import { BsFillPersonFill } from "react-icons/bs";
 
 const RecipeSearch = () => {
-  const { currentUser, isLoading, logout } = useAuth(); // Access the current user, loading state, and logout function from AuthContext
+  const { currentUser, isLoading, login, logout } = useAuth(); // Access the current user, loading state, login, and logout functions from AuthContext
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage] = useState(3);
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate(); // Access the history object from react-router-dom
+  const userId = localStorage.getItem("userId");
 
+  // Use the user ID for further operations
+  console.log(userId);
   const handleSearch = async (event) => {
     event.preventDefault();
 
@@ -26,7 +29,6 @@ const RecipeSearch = () => {
 
     try {
       const recipeData = await RecipeService.searchRecipes(searchQuery);
-      console.log(recipeData); // Check the data received from the service
       setRecipes(recipeData);
       setCurrentPage(1); // Reset to first page when new search is performed
       setShowAlert(false); // Hide the alert when search is successful
@@ -85,14 +87,75 @@ const RecipeSearch = () => {
   }
 
   if (!currentUser) {
-    return null; // Return null to prevent rendering the component temporarily
+    return (
+      <div className="recipe-search-container background-image">
+        <div className="recipe-search-form">
+          <div className="dropdown-button-container dropdown-container">
+            <Dropdown drop="start">
+              <Dropdown.Toggle variant="light" id="dropdown-basic">
+                <BsFillPersonFill />
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu align="right">
+                <Dropdown.Item>Profile</Dropdown.Item>
+                <Dropdown.Item onClick={login}>Login</Dropdown.Item>{" "}
+                {/* Add the login function to the Login menu item */}
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+          <h1 className="form-title">Delicious Recipes with Recipe Finder</h1>
+          <p className="form-description">
+            Turn your leftover ingredients into culinary masterpieces! With
+            Recipe Finder, simply enter the ingredients you have on hand and
+            unlock a world of mouthwatering recipes tailored to your pantry.
+          </p>
+          <form
+            onSubmit={handleSearch}
+            className="d-flex justify-content-center form-container"
+          >
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="Search for recipes..."
+              className="recipe-search-input me-2"
+            />
+            <button type="submit" className="btn btn-dark recipe-search-button">
+              Search
+            </button>
+          </form>
+
+          {showAlert && (
+            <Alert variant="danger" className="mt-3">
+              Please enter a search query.
+            </Alert>
+          )}
+
+          {recipes.length > 0 && <RecipeList recipes={currentRecipes} />}
+
+          <div className="pagination-container">
+            <Pagination>
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <Pagination.Item
+                  key={index + 1}
+                  active={index + 1 === currentPage}
+                  onClick={() => paginate(index + 1)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+            </Pagination>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="recipe-search-container background-image">
       <div className="recipe-search-form">
         <div className="dropdown-button-container dropdown-container">
-          <Dropdown>
+          <Dropdown drop="start">
             <Dropdown.Toggle variant="light" id="dropdown-basic">
               <BsFillPersonFill />
             </Dropdown.Toggle>

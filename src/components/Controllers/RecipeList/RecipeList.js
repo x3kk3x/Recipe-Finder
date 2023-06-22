@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import "./recipeList.css";
-import RecipeModal from "../RecipeModal/RecipeModal";
+import RecipeModal from "../../RecipeModal/RecipeModal";
 
 const RecipeList = ({ recipes }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);

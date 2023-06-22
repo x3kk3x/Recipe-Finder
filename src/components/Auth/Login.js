@@ -31,9 +31,9 @@ const Login = () => {
       // Redirect to the desired page after successful login
       navigate("/recipe-search");
     } catch (error) {
-      if (error.code === "auth/user-not-found") {
+      if (error.code === "user-not-found") {
         setNotExistAlert(true);
-      } else if (error.code === "auth/wrong-password") {
+      } else if (error.code === "wrong-password") {
         setIncorrectPasswordAlert(true);
       } else {
         setErrorMessage(error.message);
@@ -45,71 +45,73 @@ const Login = () => {
   return (
     <div className="login-container background-image">
       <div className="login-form">
-        <h2 className="login-title">Login</h2>
-        <Form onSubmit={handleLogin}>
-          {/* Form fields */}
-          <Form.Group controlId="formEmail">
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              className="login-input"
-              name="email"
-            />
-          </Form.Group>
+        <div className="login-window">
+          <h2 className="login-title">Login</h2>
+          <Form onSubmit={handleLogin}>
+            {/* Form fields */}
+            <Form.Group controlId="formEmail">
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                className="login-input"
+                name="email"
+              />
+            </Form.Group>
 
-          <Form.Group controlId="formPassword" className="mt-3 mb-3">
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              className="login-input"
-              name="password"
-            />
-          </Form.Group>
+            <Form.Group controlId="formPassword" className="mt-3 mb-3">
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                className="login-input"
+                name="password"
+              />
+            </Form.Group>
 
-          {/* Bootstrap Alerts */}
-          {notExistAlert && (
-            <Alert
-              variant="danger"
-              onClose={() => setNotExistAlert(false)}
-              dismissible
-            >
-              User does not exist. Please sign up.
-            </Alert>
-          )}
+            {/* Bootstrap Alerts */}
+            {notExistAlert && (
+              <Alert
+                variant="danger"
+                onClose={() => setNotExistAlert(false)}
+                dismissible
+              >
+                User does not exist. Please sign up.
+              </Alert>
+            )}
 
-          {incorrectPasswordAlert && (
-            <Alert
-              variant="danger"
-              onClose={() => setIncorrectPasswordAlert(false)}
-              dismissible
-            >
-              Incorrect password. Please try again.
-            </Alert>
-          )}
+            {incorrectPasswordAlert && (
+              <Alert
+                variant="danger"
+                onClose={() => setIncorrectPasswordAlert(false)}
+                dismissible
+              >
+                Incorrect password. Please try again.
+              </Alert>
+            )}
 
-          {showErrorAlert && (
-            <Alert
-              variant="danger"
-              onClose={() => setShowErrorAlert(false)}
-              dismissible
-            >
-              {errorMessage}
-            </Alert>
-          )}
+            {showErrorAlert && (
+              <Alert
+                variant="danger"
+                onClose={() => setShowErrorAlert(false)}
+                dismissible
+              >
+                {errorMessage}
+              </Alert>
+            )}
 
-          {/* Login button */}
-          <Button variant="dark" type="submit" className="mt-5">
-            Login
-          </Button>
+            {/* Login button */}
+            <Button variant="dark" type="submit" className="mt-5">
+              Login
+            </Button>
 
-          {/* Other links */}
-          {/* ... */}
-        </Form>
-        <Link to="/forgotten-password">
-          <Button variant="outline-dark" type="submit" className="mt-5">
-            Forgot Password
-          </Button>
-        </Link>
+            {/* Other links */}
+            {/* ... */}
+          </Form>
+          <Link to="/forgotten-password">
+            <Button variant="outline-dark" type="submit" className="mt-5">
+              Forgot Password
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
