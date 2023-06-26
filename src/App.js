@@ -7,19 +7,6 @@ import Login from "./components/Auth/Login";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import RegistrationSuccessful from "./components/Auth/RegistrationSuccessful";
 import { AuthProvider } from "./components/Auth/AuthContext";
-const express = require("express");
-const session = require("express-session");
-
-const app = express();
-
-app.use(
-  session({
-    secret: "MySecretKey123",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-  })
-);
 
 const App = () => {
   return (
