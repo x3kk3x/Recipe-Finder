@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import RecipeService from "../../../services/RecipeService/RecipeService";
 import { Pagination, Alert, Button, Row, Col, Dropdown } from "react-bootstrap";
-
-import "./recipeSearch.css";
-import { useAuth } from "../../Auth/AuthContext"; // Import the AuthContext
+import { useAuth } from "../../Auth/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { BsFillPersonFill } from "react-icons/bs";
+import { useSession } from "react-session"; // Import the useSession hook
 
 const RecipeSearch = () => {
-  const { currentUser, isLoading, login, logout } = useAuth(); // Access the current user, loading state, login, and logout functions from AuthContext
+  const { currentUser, isLoading, login, logout } = useAuth();
+  const { session } = useSession(); // Access the session data
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage] = useState(3);
   const [showAlert, setShowAlert] = useState(false);
-  const navigate = useNavigate(); // Access the history object from react-router-dom
+  const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
   // Use the user ID for further operations
@@ -60,7 +60,7 @@ const RecipeSearch = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  if (!currentUser && !isLoading) {
+  if (!currentUser && !isLoading && !session.loggedIn) {
     return (
       <div className="recipe-search-container background-image">
         <div className="container recipe-form-alert recipe-search-form">
