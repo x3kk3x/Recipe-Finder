@@ -95,7 +95,8 @@ const RecipeSearch = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu align="right">
-                <Dropdown.Item>Profile</Dropdown.Item>
+              <Link to="/Profile">
+                <Dropdown.Item>Profile</Dropdown.Item></Link>
                 <Dropdown.Item onClick={login}>Login</Dropdown.Item>{" "}
                 {/* Add the login function to the Login menu item */}
               </Dropdown.Menu>
