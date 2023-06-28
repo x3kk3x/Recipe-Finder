@@ -3,6 +3,7 @@ import { Form, Button, Alert } from "react-bootstrap";
 import "./style/login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../services/Firebase/firebase";
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
   const [notExistAlert, setNotExistAlert] = useState(false);
@@ -10,6 +11,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['userToken']);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -28,6 +30,8 @@ const Login = () => {
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
+      // Set cookie with user token
+      setCookie('userToken', 'your-user-token', { path: '/' });
       // Redirect to the desired page after successful login
       navigate("/recipe-search");
     } catch (error) {
