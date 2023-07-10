@@ -1,0 +1,49 @@
+.profile-window {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 65vh;
+    background-color: #fff;
+    padding: 60px;
+    border-radius: 50px;
+    background: #ffffff;
+    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+    background-image: url("../../../public/fruit.png");
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-position-x: left;
+    background-size: 25%;
+  }
+  
+  .background-image {
+    background-image: url("../../../public/vegetables.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80%;
+  }
+
+  .profile-form {
+    width: 50%;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  
+  .profile-title {
+    font-size: 2.7rem;
+    font-family: "Roboto Mono", monospace;
+    font-weight: bold;
+  }
+  
+  .home-button {
+    margin-top: 20px;
+  }
+  
+  /* Add any additional styling as needed */
+  

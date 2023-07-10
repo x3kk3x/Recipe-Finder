@@ -160,7 +160,7 @@ const RecipeSearch = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu align="right">
-              <Dropdown.Item>Profile</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
               <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
