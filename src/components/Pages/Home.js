@@ -13,28 +13,36 @@ const Home = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="home-title">Delicious Recipes with Recipe Finder</h1>
+        <h1 className="home-title">
+          The Gastronomic Galaxy <br></br> <small>(A Whimsical Journey into Human Cuisine)</small>
+        </h1>
         <p className="home-description">
-          Turn your leftover ingredients into culinary masterpieces! With Recipe
-          Finder, simply enter the ingredients you have on hand and unlock a
-          world of mouthwatering recipes tailored to your pantry.
+          In 'The Intergalactic Epicurean's Handbook,' aliens embark on a
+          delightful odyssey through human cuisine. With humor and curiosity,
+          the guide demystifies the intricacies of human gastronomy, exploring
+          peculiar ingredients, unique cooking methods, and cultural nuances.
+          From the simplicity of meatloaf to the complexity of molecular
+          gastronomy, the aliens encounter a diverse array of recipes. Through
+          witty narratives and absurd encounters, the guide captures the essence
+          of culinary exploration, inviting readers on a delightful and
+          perplexing journey through the cosmos of human food
         </p>
-        <Row className="justify-content-between">
-          <Col xs="auto">
+        {/* <Row className="justify-content-between">
+          <Col xs="auto"> */}
             <Link to="/signup">
-              <Button className="home-button" variant="dark">
-                Sign Up
+              <Button className="welcome-cta" variant="dark">
+                WELCOME
               </Button>
             </Link>
-          </Col>
-          <Col xs="auto">
+          {/* </Col> */}
+          {/* <Col xs="auto">
             <Link to="/login">
               <Button className="home-button" variant="dark">
                 Login
               </Button>
             </Link>
           </Col>
-        </Row>
+        </Row> */}
       </motion.div>
     </Container>
   );

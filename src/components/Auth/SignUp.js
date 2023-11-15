@@ -13,13 +13,13 @@ const Signup = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-
+  
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setEmailError("Please enter a valid email address");
       return;
     }
-
+  
     try {
       const userCredential = await auth.createUserWithEmailAndPassword(
         email,
@@ -27,9 +27,12 @@ const Signup = () => {
       );
       const user = userCredential.user;
       await user.sendEmailVerification();
-
-      // Additional logic here if needed
-
+  
+      // Save the user's name to Firebase
+      await user.updateProfile({
+        displayName: name,
+      });
+  
       navigate("/home");
     } catch (error) {
       console.log(error.message);

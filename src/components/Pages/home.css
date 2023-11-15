@@ -31,10 +31,11 @@
 }
 
 .home-title {
-  font-size: 2.7rem;
+  font-size: 3.5rem;
   margin-bottom: 50px;
   font-family: "Roboto Mono", monospace;
   font-weight: bold;
+  text-align: center;
 }
 
 .home-description {
@@ -43,4 +44,8 @@
   font-family: "Roboto Mono", monospace;
   font-weight: bold;
   text-align: center;
+}
+
+small {
+  font-size: 1.5rem;
 }

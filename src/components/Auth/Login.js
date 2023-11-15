@@ -31,11 +31,11 @@ const Login = () => {
     try {
       const userCredential = await auth.signInWithEmailAndPassword(email, password);
       const userToken = await userCredential.user.getIdToken();
-      console.log("userToken:", userToken); // Add this console log
+      console.log("userToken:", userToken); 
       setCookie("userToken", userToken, { path: "/" });
-      navigate("/recipe-search");
+      navigate("/home");
     } catch (error) {
-      console.log("Login error:", error); // Add this console log
+      console.log("Login error:", error);
       if (error.code === "auth/user-not-found") {
         setNotExistAlert(true);
       } else if (error.code === "auth/wrong-password") {
