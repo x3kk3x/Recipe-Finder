@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./profile.css";
 import { useCookies } from "react-cookie";
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
+import { firestore } from "../../services/Firebase/firebase";
+import { doc, updateDoc } from 'firebase/firestore';
 
 const Profile = () => {
   const [email, setEmail] = useState("");
@@ -20,34 +22,24 @@ const Profile = () => {
         if (userData) {
           setEmail(userData.email);
           setName(userData.name);
+          // Optionally, fetch and set the existing description from Firestore
         }
       } catch (error) {
         console.log("Error decoding token:", error);
       }
     }
   }, [cookies]);
-  
-  
 
   const parseUserDataFromToken = (userToken) => {
     if (userToken) {
-      // Decode the user token
       const decodedToken = jwtDecode(userToken);
-  
-      // Extract the email and name from the decoded token
-      const email = decodedToken.email;
-      const name = decodedToken.name;
-  
-      // Return an object with the email and name properties
       return {
-        email: email,
-        name: name,
+        email: decodedToken.email,
+        name: decodedToken.name,
       };
     }
     return null;
   };
-  
-  
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -59,6 +51,17 @@ const Profile = () => {
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
+  };
+
+  const updateDescriptionInFirestore = async () => {
+    try {
+      const userDocRef = doc(firestore, 'users', email); // Correct way to get a document reference
+      await updateDoc(userDocRef, { description: description });
+      alert('Description updated successfully!');
+    } catch (error) {
+      console.error('Error updating description: ', error);
+      alert('Error updating description: ' + error.message);
+    }
   };
 
   return (
@@ -100,8 +103,17 @@ const Profile = () => {
               onChange={handleDescriptionChange}
             />
           </Form.Group>
+
+          {/* Save Button */}
+          <Button
+            type="button"
+            variant="primary"
+            onClick={updateDescriptionInFirestore}
+          >
+            Save Description
+          </Button>
         </Form>
-        <Link to="/">
+        <Link to="/home">
           <Button className="home-button" variant="dark">
             Go Back to Home
           </Button>

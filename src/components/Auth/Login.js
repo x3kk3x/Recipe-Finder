@@ -3,6 +3,7 @@ import { Form, Button, Alert } from "react-bootstrap";
 import "./style/login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../services/Firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth"; // Import signInWithEmailAndPassword
 import { useCookies } from "react-cookie";
 
 const Login = () => {
@@ -29,13 +30,11 @@ const Login = () => {
     const password = e.target.password.value;
   
     try {
-      const userCredential = await auth.signInWithEmailAndPassword(email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const userToken = await userCredential.user.getIdToken();
-      console.log("userToken:", userToken); 
       setCookie("userToken", userToken, { path: "/" });
       navigate("/home");
     } catch (error) {
-      console.log("Login error:", error);
       if (error.code === "auth/user-not-found") {
         setNotExistAlert(true);
       } else if (error.code === "auth/wrong-password") {
@@ -53,7 +52,6 @@ const Login = () => {
         <div className="login-window">
           <h2 className="login-title">Login</h2>
           <Form onSubmit={handleLogin}>
-            {/* Form fields */}
             <Form.Group controlId="formEmail">
               <Form.Control
                 type="email"
@@ -72,7 +70,6 @@ const Login = () => {
               />
             </Form.Group>
 
-            {/* Bootstrap Alerts */}
             {notExistAlert && (
               <Alert
                 variant="danger"
@@ -103,19 +100,16 @@ const Login = () => {
               </Alert>
             )}
 
-            {/* Login button */}
             <Button variant="dark" type="submit" className="mt-5">
               Login
             </Button>
 
-            {/* Other links */}
-            {/* ... */}
+            <Link to="/forgotten-password">
+              <Button variant="outline-dark" type="button" className="mt-5">
+                Forgot Password
+              </Button>
+            </Link>
           </Form>
-          <Link to="/forgotten-password">
-            <Button variant="outline-dark" type="submit" className="mt-5">
-              Forgot Password
-            </Button>
-          </Link>
         </div>
       </div>
     </div>

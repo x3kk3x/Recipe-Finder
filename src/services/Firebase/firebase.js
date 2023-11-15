@@ -1,21 +1,20 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+
 
 const firebaseConfig = {
-  // Your Firebase project configuration
   apiKey: "AIzaSyAVGDcHQqLmwDjQcr_m0wSsRPKY75UV8Fg",
   authDomain: "recipe-finder-a15b3.firebaseapp.com",
   projectId: "recipe-finder-a15b3",
-  // ...other configuration properties
+  storageBucket: "recipe-finder-a15b3.appspot.com",
+  messagingSenderId: "709470990934",
+  appId: "1:709470990934:web:6526f424778900f792c1f7",
+  measurementId: "G-7QJVCMML0S"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const firestore = getFirestore(app);
+const auth = getAuth(app);
 
-// Get Firebase auth and firestore references
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-
-// Export Firebase services
-export { auth, firestore };
+export { firestore, auth };
