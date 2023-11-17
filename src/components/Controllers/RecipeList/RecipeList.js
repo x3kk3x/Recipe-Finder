@@ -1,63 +1,46 @@
-import React, { useState } from "react";
-import { Card, Row, Col, Button } from "react-bootstrap";
-import "./recipeList.css";
-import RecipeModal from "../../RecipeModal/RecipeModal";
+import React, { useState } from 'react';
+import RecipeModal from '../../RecipeModal/RecipeModal'; // Ensure this path is correct
 
-const RecipeList = ({ recipes }) => {
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
+const RecipeList = ({ recipes, userId }) => {
+    const [selectedRecipe, setSelectedRecipe] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleCardClick = (recipe) => {
-    setSelectedRecipe(recipe);
-    setModalVisible(true);
-  };
+    const openModal = (recipe) => {
+        setSelectedRecipe(recipe); // Set the selected recipe
+        setIsModalVisible(true);    // Show the modal
+        console.log("Selected recipe:", recipe);  // Log the selected recipe
+        console.log("Modal visible:", true); 
+    };
 
-  const handleModalClose = () => {
-    setModalVisible(false);
-    setSelectedRecipe(null);
-  };
+    const closeModal = () => {
+        setIsModalVisible(false);   // Hide the modal
+        setSelectedRecipe(null);    // Clear the selected recipe
+    };
 
-  return (
-    <Row className="justify-content-center d-flex">
-      {recipes && recipes.length > 0 ? (
-        recipes.map((recipe, index) => (
-          <Col key={index}>
-            <div className="recipe-card">
-              <Card className="recipe-card">
-                <Card.Img variant="top" src={recipe.image} />
-                <Card.Body>
-                  <Card.Title className="recipe-title">
-                    {recipe.label}
-                  </Card.Title>
-                  <Card.Text className="recipe-description">
-                    {recipe.cuisineType}
-                  </Card.Text>
-                  <Card.Text className="recipe-description">
-                    {recipe.mealType}
-                  </Card.Text>
-                  <Button
-                    variant="dark"
-                    onClick={() => handleCardClick(recipe)}
-                  >
-                    Show more
-                  </Button>
-                </Card.Body>
-              </Card>
-            </div>
-          </Col>
-        ))
-      ) : (
-        <div></div>
-      )}
-      {modalVisible && (
-        <RecipeModal
-          recipe={selectedRecipe}
-          visible={modalVisible}
-          onClose={handleModalClose}
-        />
-      )}
-    </Row>
-  );
+    return (
+        <div>
+            {recipes.map((recipe, index) => {
+                const key = recipe.id ? `recipe-${recipe.id}` : `recipe-${index}`;
+                return (
+                  <div key={key} onClick={() => openModal(recipe)} style={{ cursor: 'pointer' }}>
+
+                        <h3>{recipe.title}</h3>
+                        {/* More recipe details */}
+                    </div>
+                );
+            })}
+
+            {/* Render RecipeModal only if a recipe is selected and modal visibility is true */}
+            {selectedRecipe && isModalVisible && (
+                <RecipeModal
+                    recipe={selectedRecipe}
+                    visible={isModalVisible}
+                    onClose={closeModal}
+                    userId={userId}
+                />
+            )}
+        </div>
+    );
 };
 
 export default RecipeList;

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import './services/Firebase/firebase'; 
 import Home from "./components/Pages/Home";
 import RecipeSearch from "./components/Controllers/RecipeSearch/RecipeSearch";
 import SignUp from "./components/Auth/SignUp";

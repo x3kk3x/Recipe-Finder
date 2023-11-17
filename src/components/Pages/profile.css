@@ -46,3 +46,42 @@
   }
   
   
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-title {
+  color: #333;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Makes the image round */
+  object-fit: cover; /* Ensures the image covers the area without stretching */
+  display: block;
+  margin: 0 auto 20px; /* Center the image and add spacing below */
+}
+
+.profile-form .form-group {
+  margin-bottom: 15px;
+}
+
+/* Row and columns for side by side buttons */
+.profile-form .row {
+  margin-top: 20px;
+}
+
+.profile-form .row .col {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+}
+
+.profile-form .row .col:first-child {
+  margin-right: 10px; /* Spacing between the buttons */
+}
+
+.profile-form .row .col:last-child {
+  margin-left: 10px; /* Spacing between the buttons */
+}

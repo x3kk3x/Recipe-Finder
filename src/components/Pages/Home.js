@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./home.css";

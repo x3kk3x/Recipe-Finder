@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Button, Form } from "react-bootstrap";
+import { Container, Button, Form, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./profile.css";
@@ -45,7 +45,7 @@ const Profile = () => {
 
       if (docSnap.exists()) {
         setDescription(docSnap.data().description);
-        setPhotoURL(docSnap.data().photoURL || ""); // Set photo URL if available
+        setPhotoURL(docSnap.data().photoURL || "");
       } else {
         console.log("No such document!");
       }
@@ -70,7 +70,7 @@ const Profile = () => {
     if (!file) return;
 
     const storage = getStorage();
-    const storageRef = ref(storage, 'profilePictures/' + email);
+    const storageRef = ref(storage, 'profilePictures/' + encodeURIComponent(email));
 
     try {
       const snapshot = await uploadBytes(storageRef, file);
@@ -91,7 +91,7 @@ const Profile = () => {
   };
 
   return (
-    <Container className="d-flex align-items-center background-image justify-content-center vh-100">
+    <Container className="d-flex align-items-center justify-content-center vh-100">
       <motion.div
         className="animated-component profile-window"
         initial={{ opacity: 0, scale: 0.8 }}
@@ -101,7 +101,9 @@ const Profile = () => {
         <div className="profile-header">
           <h1 className="profile-title">Profile</h1>
         </div>
-        {photoURL && <img src={photoURL} alt="Profile" className="profile-picture" />}
+        {photoURL && (
+          <img src={photoURL} alt="Profile" className="profile-picture" />
+        )}
         <Form className="profile-form">
           <Form.Group controlId="formProfilePicture">
             <Form.Label>Profile Picture</Form.Label>
@@ -136,15 +138,21 @@ const Profile = () => {
             />
           </Form.Group>
 
-          <Button variant="primary" onClick={updateDescriptionInFirestore}>
-            Save Description
-          </Button>
+          <Row>
+            <Col>
+              <Button variant="dark" onClick={updateDescriptionInFirestore}>
+                Save
+              </Button>
+            </Col>
+            <Col>
+              <Link to="/home">
+                <Button variant="dark">
+                  Back
+                </Button>
+              </Link>
+            </Col>
+          </Row>
         </Form>
-        <Link to="/home">
-          <Button className="home-button" variant="dark">
-            Go Back to Home
-          </Button>
-        </Link>
       </motion.div>
     </Container>
   );
